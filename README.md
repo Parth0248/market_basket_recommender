@@ -6,7 +6,6 @@
 
 **CMPE 256 Recommender Systems - Data Science Hackathon**  
 **San José State University - Fall 2025**  
-**Professor: Chandrasekar Vuppalapati**
 **Team Members**: Parth Maradia(019104527), Kalhar Patel(019140511), Abhishek Darji(019113471)
 
 ---
