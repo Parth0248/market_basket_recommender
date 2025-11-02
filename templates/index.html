@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electronic Item Checkout - SJSU Market Basket System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0055A2 0%, #003366 100%);
+            color: white;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #FFB81C;
+        }
+
+        .header-title {
+            border-left: 3px solid #FFB81C;
+            padding-left: 20px;
+        }
+
+        .header-title h1 {
+            font-size: 28px;
+            margin-bottom: 5px;
+        }
+
+        .header-title p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .cart-icon {
+            font-size: 40px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 0;
+            min-height: 600px;
+        }
+
+        .product-section {
+            padding: 30px;
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #0055A2;
+        }
+
+        .product-list {
+            display: grid;
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .product-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .product-item:hover {
+            background: #e3f2fd;
+            border-color: #0055A2;
+            transform: translateX(5px);
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-sku {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .add-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .add-btn:active {
+            transform: scale(0.95);
+        }
+
+        .cart-section {
+            background: #f5f5f5;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-items {
+            flex: 1;
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            background: white;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .remove-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .remove-btn:hover {
+            background: #cc0000;
+        }
+
+        .recommendations {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .recommendation-item {
+            background: #fff3cd;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .recommendation-item:hover {
+            background: #ffe69c;
+            cursor: pointer;
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #999;
+            padding: 40px;
+            font-style: italic;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .stat-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0055A2;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        /* Scrollbar styling */
+        .product-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .product-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .product-list::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+
+        .product-list::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .recommendation-icon {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #ffc107;
+            border-radius: 3px;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-left">
+                <div class="logo">SJSU</div>
+                <div class="header-title">
+                    <h1>Electronic Item Checkout Web Portal</h1>
+                    <p>Market Basket Recommendation System - CMPE 256</p>
+                </div>
+            </div>
+            <div class="cart-icon">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="product-section">
+                <h2 class="section-title">Select Item from the List:</h2>
+                <div class="product-list" id="productList">
+                    {% for product in products %}
+                    <div class="product-item">
+                        <div class="product-info">
+                            <div class="product-name">{{ product.product_name }}</div>
+                            <div class="product-sku">SKU: {{ product.sku }}</div>
+                        </div>
+                        <button class="add-btn" onclick="addToCart('{{ product.sku }}', '{{ product.product_name }}')">
+                            Add Item
+                        </button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="cart-section">
+                <h2 class="section-title">Added Items to Cart:</h2>
+                <div class="cart-items" id="cartItems">
+                    <div class="empty-message">Your cart is empty. Add items to get started!</div>
+                </div>
+
+                <div class="recommendations" id="recommendationsContainer" style="display: none;">
+                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <span class="recommendation-icon">✨</span>
+                        <h3 style="margin: 0;">Recommended Items:</h3>
+                    </div>
+                    <div id="recommendations"></div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="itemCount">0</div>
+                        <div class="stat-label">Items in Cart</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="recCount">0</div>
+                        <div class="stat-label">Recommendations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function addToCart(sku, productName) {
+            // Check if item already in cart
+            if (cart.find(item => item.sku === sku)) {
+                alert('Item already in cart!');
+                return;
+            }
+
+            // Add to cart
+            cart.push({ sku, productName });
+            updateCart();
+            getRecommendations();
+        }
+
+        function removeFromCart(sku) {
+            cart = cart.filter(item => item.sku !== sku);
+            updateCart();
+            getRecommendations();
+        }
+
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const itemCount = document.getElementById('itemCount');
+
+            cartCount.textContent = cart.length;
+            itemCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = '<div class="empty-message">Your cart is empty. Add items to get started!</div>';
+                document.getElementById('recommendationsContainer').style.display = 'none';
+                return;
+            }
+
+            cartItemsDiv.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div>
+                        <div class="product-name">${item.productName}</div>
+                        <div class="product-sku">SKU: ${item.sku}</div>
+                    </div>
+                    <button class="remove-btn" onclick="removeFromCart('${item.sku}')">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        async function getRecommendations() {
+            if (cart.length === 0) {
+                document.getElementById('recommendationsContainer').style.display = 'none';
+                return;
+            }
+
+            const cartSkus = cart.map(item => item.sku);
+
+            try {
+                const response = await fetch('/api/recommendations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        cart_items: cartSkus,
+                        top_n: 5
+                    })
+                });
+
+                const data = await response.json();
+                displayRecommendations(data.recommendations);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+            }
+        }
+
+        function displayRecommendations(recommendations) {
+            const recommendationsDiv = document.getElementById('recommendations');
+            const recommendationsContainer = document.getElementById('recommendationsContainer');
+            const recCount = document.getElementById('recCount');
+
+            recCount.textContent = recommendations.length;
+
+            if (recommendations.length === 0) {
+                recommendationsContainer.style.display = 'none';
+                return;
+            }
+
+            recommendationsContainer.style.display = 'block';
+            recommendationsDiv.innerHTML = recommendations.map((rec, index) => `
+                <div class="recommendation-item" onclick="addToCart('${rec.sku}', '${rec.product_name}')">
+                    <div class="product-name">
+                        ${index + 1}. ${rec.product_name}
+                        <span class="confidence-badge">${(rec.confidence * 100).toFixed(0)}% confidence</span>
+                    </div>
+                    <div class="product-sku">
+                        SKU: ${rec.sku} | Lift: ${rec.lift.toFixed(2)}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initialize
+        updateCart();
+    </script>
+</body>
+</html>
