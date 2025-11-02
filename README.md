@@ -8,6 +8,7 @@
 **San José State University - Fall 2025**  
 **Team Members**: Parth Maradia(019104527), Kalhar Patel(019140511), Abhishek Darji(019113471)
 
+[Demo Video](https://drive.google.com/file/d/1n3UiU-EtyAqCVydAWAoKwTe7WaleueI8/view?usp=sharing)
 ---
 
 ## 📋 Table of Contents
@@ -27,6 +28,7 @@
 - [License](#license)
 
 ---
+<img width="1919" height="990" alt="image" src="https://github.com/user-attachments/assets/9e4096d2-57d3-4cc8-808c-646f49eba55d" />
 
 ## 🎯 Project Overview
 
@@ -127,7 +129,6 @@ When customers shop online, they often miss complementary products that others f
 ```
 
 ---
-<img width="1457" height="927" alt="image" src="https://github.com/user-attachments/assets/e1a5dc78-1957-4abf-95a0-ed8d8824e161" />
 
 ## 🚀 Installation
 
