@@ -146,9 +146,9 @@ class MarketBasketRecommender:
                 result.append({
                     'sku': rec['sku'],
                     'product_name': product_info.iloc[0]['ProductName'],
-                    'confidence': float(rec['confidence']),
-                    'lift': float(rec['lift']),
-                    'support': float(rec['support'])
+                    'confidence': round(float(rec['confidence']), 4),
+                    'lift': round(float(rec['lift']), 4),
+                    'support': round(float(rec['support']), 4)
                 })
         
         return result
