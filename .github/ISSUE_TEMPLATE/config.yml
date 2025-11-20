@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📚 Documentation
+    url: https://github.com/Parth0248/market_basket_recommender/blob/main/README.md
+    about: Check the comprehensive README for system architecture, usage, and examples
+  - name: 🚀 Quick Start Guide
+    url: https://github.com/Parth0248/market_basket_recommender/blob/main/QUICKSTART.md
+    about: Get started in 3 minutes with the quick start guide
+  - name: 📖 API Examples
+    url: https://github.com/Parth0248/market_basket_recommender/blob/main/API_EXAMPLES.md
+    about: Learn how to use the REST API with practical examples
