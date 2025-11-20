@@ -24,6 +24,7 @@
 - [Screenshots](#screenshots)
 - [Testing](#testing)
 - [Future Enhancements](#future-enhancements)
+- [Contributing](#contributing)
 - [Contributors](#contributors)
 - [License](#license)
 
@@ -509,7 +510,19 @@ This dataset was prepared exclusively for academic use in the San José State Un
 
 ---
 
-## 🤝 Contributors
+## 🤝 Contributing
+
+We welcome contributions to improve the Market Basket Recommender System! Whether you want to report bugs, request features, or contribute code, please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+
+### Quick Links
+- [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.md)
+- [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.md)
+- [Ask a Question](.github/ISSUE_TEMPLATE/question.md)
+- [Contribution Guidelines](CONTRIBUTING.md)
+
+---
+
+## 👥 Contributors
 
 This project was developed as part of the CMPE 256 Data Science Hackathon (November 01-02, 2025).
 
